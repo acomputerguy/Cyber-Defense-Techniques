@@ -1,5 +1,11 @@
 #Automate the process to run the competition.
 
+#Pre-conditions:
+#Virtual machines are in respective folders, different folders (red/blue) for different competitions (1/2/3)
+#Example: File structure for blue team VMs are in Resource Pool->CDT Class->Blue Team->Blue Comp 2
+#Student accounts follow a naming convention: <first letter of first name in upper case><last name in all lower case>
+#Example: Aschwarzenegger
+
 #Functionalities
 #Process goes as follows (commands run consectuvively):
 #Prompt user for snapshot name and descriptions in beginning
@@ -46,18 +52,11 @@ $redVMs = Get-Folder "Red Comp 2" | Get-VM
 #try adding role itself?
 Set-VIRole -Role "Console Only" -AddPrivilege "Console interaction"
 Set-VIRole -Role "Console Only" -AddPrivilege "Answer question"
-#I get lost when I do Set-VIPermission -Permission ??? -Role "Console Only" -Propagate:$true
-#propagate goes to child objects, which are the virtual boxes
 
 #Need to turn on scoring engine for white team per request
 $scoringEngineVM = Get-VM | where {$_.name -eq "Heartbeat - Scoring Engine" }
 if ($scoringEngineVM.PowerState -eq "Suspended" -Or $scoringEngineVM.PowerState -eq "PoweredOff")
 { Start-VM $scoringEngineVM }
-#else #if the machine is already on, proceed
-#{ Continue }
-
-###WORKING ON###
-#Check if you can verify VM is corrupted/OS not boot on (like VM box is on but no OS with Chase)
 
 #VM input validation - what if a VM is already turned on?
 $startBlueVMs = $blueVMs | where { $_.Powerstate -ne "PoweredOn" }
