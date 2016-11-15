@@ -6,8 +6,7 @@
 #Student accounts follow a naming convention: <first letter of first name in upper case><last name in all lower case>
 #Example: Aschwarzenegger
 
-#Functionalities
-#Process goes as follows (commands run consectuvively):
+#Functionalities (commands run consectuvively):
 #Prompt user for snapshot name and descriptions in beginning
 #Turn on blue and red team virtual machines
 #(only to those who are not turned on)
