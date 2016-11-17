@@ -27,6 +27,7 @@ function printFormat {
 }
 ###EO formatting###
 
+###Prompt user for snapshot details###
 Write-Host "Thinking way ahead...`nSnapshot name of" -NoNewline
 Write-Host " blue " -foregroundcolor blue -NoNewline
 $blueName = Read-Host -Prompt "VMs"
@@ -48,7 +49,6 @@ $blueVMs = Get-Folder "Blue Comp 2" | Get-VM
 $redVMs = Get-Folder "Red Comp 2" | Get-VM
 
 ###Grant privileges in Console-Only role to its respective members###
-#try adding role itself?
 Set-VIRole -Role "Console Only" -AddPrivilege "Console interaction"
 Set-VIRole -Role "Console Only" -AddPrivilege "Answer question"
 
@@ -62,7 +62,6 @@ $startBlueVMs = $blueVMs | where { $_.Powerstate -ne "PoweredOn" }
 $startRedVMs = $redVMs | where { $_.Powerstate -ne "PoweredOn" }
 
 ###Print out affected virtual macines###
-#but try foreach object or item?
 printFormat "VMs in competition include"
 foreach($VM in $startBlueVMs)
 { Write-Host $VM -foregroundcolor blue }
@@ -70,7 +69,6 @@ foreach($VM in $startRedVMs)
 { Write-Host $VM -foregroundcolor red }
 
 ###Start all affected virtual machines in background consecutively###
-#?starting these prints out a bunch of stuff
 printFormat "Powered on the following VMs"
 foreach($VM in $startBlueVMs)
 { Start-VM -VM $VM -RunAsync:$false }
@@ -160,7 +158,6 @@ Set-VIRole -Role "Console Only" -RemovePrivilege "Console interaction"
 Set-VIRole -Role "Console Only" -RemovePrivilege "Answer question"
 
 #Input validation for VMs - what if a student turned off/suspended the VM for me?
-#cant do $_.Powerstate -ne "Suspended", "PoweredOff"
 $stopBlueVMs = $blueVMs | where { $_.Powerstate -eq "PoweredOn" }
 $stopRedVMs = $redVMs | where { $_.Powerstate -eq "PoweredOn" }
 
