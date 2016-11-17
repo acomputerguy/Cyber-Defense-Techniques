@@ -82,7 +82,7 @@ $serviceInstance = Get-View ServiceInstance
 $sessionManager = Get-View $serviceInstance.Content.SessionManager
 $sessionManager.Message
 
-###User input for time to wait until next commands###
+###User input for time to wait in progress bar until next commands###
 $timeWait = Read-Host -Prompt "Waiting time [format is HR,MIN e.g. 1,25]"
 
 $hours = $timeWait[0]
