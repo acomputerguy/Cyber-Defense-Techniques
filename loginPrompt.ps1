@@ -28,7 +28,7 @@ function loginVcenter {
 	{
 		#There will only be 1 user so pull that user
 		$cred = Get-VICredentialStoreItem -User *
-		Connect-VIServer -Server $cred.Host -User $cred.User -password $cred.Password -Force
+		Connect-VIServer -Server $cred.Host -Protocol https -User $cred.User -password $cred.Password -Force
 		break
 	}
 
