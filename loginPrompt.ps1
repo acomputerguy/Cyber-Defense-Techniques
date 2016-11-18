@@ -1,4 +1,4 @@
-#Input code into Initialize-PowerCLIEnvironment.ps1 file
+#Input code at the end of Initialize-PowerCLIEnvironment.ps1 file
 #This is where source code to automatically boot powercli is
 
 #Create function to be called if login is incorrect
