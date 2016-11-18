@@ -17,6 +17,8 @@ function loginVcenter {
 	#Due to runtime issues, confirm for user to input first
 	Write-Host "`nPress any key to continue...`n"
 	$host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") | out-null
+	
+	Write-Host "Ctrl+C to exist custom login script`n"
 
 	#Check if password has been logged before in boolean expression
 	$FileExists = Test-Path C:\Users\Student\AppData\Roaming\VMware\credstore\vicredentials.xml
@@ -73,9 +75,9 @@ while($true)
 		Write-Host -foregroundcolor yellow $global:DefaultVIServer
 		
 		#If login is successful, store credentials
-		$server = $credentials[0]
-		$user = $credentials[1]
-		$password = $credentials[2]
+		$server = $credentials[1]
+		$user = $credentials[2]
+		$password = $credentials[3]
 		New-VICredentialStoreItem -Host $server -User $user -Password $password
 		
 		Break
