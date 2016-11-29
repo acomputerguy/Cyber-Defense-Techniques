@@ -1,17 +1,37 @@
-#Input code at the end of Initialize-PowerCLIEnvironment.ps1 file
-#This is where source code to automatically boot powercli is
+##################Automatic Login##################
+#Input code into Initialize-PowerCLIEnvironment.ps1 file
+#This is where source code to automatically boot powercli is -
+#Ask user to log in ever time an instance of powercli starts
 
-#Create function to be called if login is incorrect
+#Conditions: Only 1 user on given box this runs on (which is always)
+
+#Functionalities
+#Wait for user to begin
+#Check if user has logged in successfully before
+#(Done by validating file path on any machine)
+#If so, log the user back in without asking for credentials
+#If not, prompt user for address, username, and password
+#Call function and store return values in case it is correct
+#Check for global error buffer if login is incorrect
+#(Only two outcomes in error buffer with three input values)
+#Loop if incorrect, clear buffer to be able to ask user again
+
 function loginVcenter {
 	<#
 	.SYNOPSIS
-	Function will automatically log into VIServer
+	Function will automatically log into VIServer,
+	and if already logged in - automatically log the user in
 	.DESCRIPTION
 	Function prompts user for server name, user name, and password
 	.EXAMPLE
-	Input the following respectively - vcenter.vase.local, fwebb, password
-	.PARAMETER
-	Queried vcenter.vase.local in my uses
+	vcenter.vase.local
+	fwebb
+	password123
+	.PARAMETER vcenter.vase.local
+	Queries the server we use
+	.PARAMETER $error, vicredentials.xml
+	Uses global error buffer if user does not log in successfully
+	Upon successful login, credentials are stored and password encrypted in vicredentials.xml
 	#>
 
 	#Due to runtime issues, confirm for user to input first
