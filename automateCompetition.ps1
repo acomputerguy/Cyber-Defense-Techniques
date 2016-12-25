@@ -2,7 +2,7 @@
 
 #Pre-conditions:
 #Virtual machines are in respective folders, different folders (red/blue) for different competitions (1/2/3)
-#Example: File structure for blue team VMs are in Resource Pool->CDT Class->Blue Team->Blue Comp 2
+#Example: File structure for blue team VMs are in a Resource Pool named CDT Class, a folder named Blue Comp 2
 #Student accounts follow a naming convention: <first letter of first name in upper case><last name in all lower case>
 #Example: Aschwarzenegger
 
@@ -19,13 +19,13 @@
 #Suspend all red and blue team boxes
 #Take snapshots with predefined user-input
 
-###Formatting###
+###Consitent formatting with PowerCLI###
 function printFormat {
 	$len = $args[0].length
 	$totalHyphens = "-" * $len
 	Write-Host "`n$args`n$totalHyphens"
 }
-###EO formatting###
+###End of formatting###
 
 ###Prompt user for snapshot details###
 Write-Host "Thinking way ahead...`nSnapshot name of" -NoNewline
@@ -52,12 +52,12 @@ $redVMs = Get-Folder "Red Comp 2" | Get-VM
 Set-VIRole -Role "Console Only" -AddPrivilege "Console interaction"
 Set-VIRole -Role "Console Only" -AddPrivilege "Answer question"
 
-#Need to turn on scoring engine for white team per request
+#Need to turn on scoring engine for white team as per request
 $scoringEngineVM = Get-VM | where {$_.name -eq "Heartbeat - Scoring Engine" }
 if ($scoringEngineVM.PowerState -eq "Suspended" -Or $scoringEngineVM.PowerState -eq "PoweredOff")
 { Start-VM $scoringEngineVM }
 
-#VM input validation - what if a VM is already turned on?
+#VM input validation - what if a VM is already turned on? In case a student turns it on
 $startBlueVMs = $blueVMs | where { $_.Powerstate -ne "PoweredOn" }
 $startRedVMs = $redVMs | where { $_.Powerstate -ne "PoweredOn" }
 
@@ -133,7 +133,7 @@ $sessionMgr = Get-View $DefaultVIServer.ExtensionData.Client.ServiceContent.Sess
 
 $allSessions = @()
 
-#4 objects for vertical info. any more, everyone gets their own section
+#Only need username and session key
 $sessionMgr.sessionList | foreach {
 		$session = New-Object -TypeName PSObject -Property @{
 		Username = $_.Username
@@ -145,8 +145,8 @@ $sessionMgr.sessionList | foreach {
 	}
 	$allSessions += $session
 }
-#Students are listed in VASE\Students
-#"^VASE\\[A-Z]" will check for first uppercase (naming convention for students)
+#Students are listed as VASE\Students
+#Checking for usernames with first letter in upper case
 $disconnectUsers = $allSessions | Where {$_.Username -cmatch "^VASE\\[A-Z]"}
 
 $disconnectUsers | foreach { 
@@ -157,7 +157,7 @@ $disconnectUsers | foreach {
 Set-VIRole -Role "Console Only" -RemovePrivilege "Console interaction"
 Set-VIRole -Role "Console Only" -RemovePrivilege "Answer question"
 
-#Input validation for VMs - what if a student turned off/suspended the VM for me?
+#Input validation for VMs - suspend VMs for machines who have yet to be suspended
 $stopBlueVMs = $blueVMs | where { $_.Powerstate -eq "PoweredOn" }
 $stopRedVMs = $redVMs | where { $_.Powerstate -eq "PoweredOn" }
 
