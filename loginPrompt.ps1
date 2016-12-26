@@ -1,4 +1,6 @@
 ##################Automatic Login##################
+#Author: Felipe Webb
+
 #Input code into Initialize-PowerCLIEnvironment.ps1 file
 #This is where source code to automatically boot powercli is -
 #Ask user to log in ever time an instance of powercli starts
@@ -7,7 +9,7 @@
 
 #Functionalities
 #Wait for user to begin
-#Check if user has logged in successfully before
+#Check if user has logged in successfully before from any machine
 #(Done by validating file path on any machine)
 #If so, log the user back in without asking for credentials
 #If not, prompt user for address, username, and password
