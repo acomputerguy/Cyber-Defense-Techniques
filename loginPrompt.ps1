@@ -38,10 +38,12 @@ function loginVcenter {
 	Write-Host "`nPress any key to continue...`n"
 	$host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") | out-null
 	
-	Write-Host "Ctrl+C to exist custom login script`n"
+	Write-Host "Ctrl+C to exist custom login script for Cyber Defense Techniques class`n"
 
-	#Check if password has been logged before in boolean expression
-	$FileExists = Test-Path C:\Users\Student\AppData\Roaming\VMware\credstore\vicredentials.xml
+	#Boolean value to check if password has been logged with relative path
+	$relativePath = $ENV:APPDATA
+	$fullPath = $relativePath + "\VMware\credstore\vicredentials.xml"
+	$FileExists = Test-Path $fullPath
 
 	#If file exists, then it is populated. Automatically log the user back in
 	if ($FileExists -eq $true)
