@@ -1,5 +1,5 @@
-##################Automatic Login##################
 #Author: Felipe Webb
+#Description: Efficient login prompt
 
 #Input code into Initialize-PowerCLIEnvironment.ps1 file
 #This is where source code to automatically boot powercli is -
