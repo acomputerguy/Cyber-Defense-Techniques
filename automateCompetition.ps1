@@ -1,4 +1,5 @@
-#Automate the process to run the competition.
+#Author: Felipe Webb
+#Description: Automate the process to run the competition.
 
 #Pre-conditions:
 #Virtual machines are in respective folders, different folders (red/blue) for different competitions (1/2/3)
