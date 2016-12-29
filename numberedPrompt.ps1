@@ -1,4 +1,5 @@
-#Prompt for numbered-based options
+#Author: Felipe Webb
+#Description: Prompt for numbered-based options
 
 $title = "Menu Options"
 $message = "Choose the following:"
