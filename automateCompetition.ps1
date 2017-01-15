@@ -8,12 +8,11 @@
 #Example: Aschwarzenegger
 
 #Functionalities (commands run consectuvively):
-#Prompt user for snapshot name and descriptions in beginning
-#Turn on blue and red team virtual machines
-#(only to those who are not turned on)
+#Prompt user for snapshot names and descriptions
+#Turn on blue and red team virtual machines that aren't already on consecutively
 #White team also requested scoring engine to be included
-#Grant Red Team and Blue Team members console-only access
-#User-defined input to say how long the code should wait with progress bar
+#Grant access to all Red & Blue Team members via Console Only roles
+#User-defined input will indicate waiting time until the next command in a progress bar
 #(Sometimes there are white team delays or a server goes down)
 #When time is up, terminate the session key of all the students in competition
 #(Require killing session so new permissions are pushed)
