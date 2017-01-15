@@ -14,6 +14,7 @@
 #Grant access to all Red & Blue Team members via Console Only roles
 #User-defined input will indicate waiting time until the next command in a progress bar
 #(Sometimes there are white team delays or a server goes down)
+#Warn everyone 5 minutes before the time is up
 #When time is up, terminate the session key of all the students in competition
 #(Require killing session so new permissions are pushed)
 #Suspend all red and blue team boxes
